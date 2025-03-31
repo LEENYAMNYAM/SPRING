@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <!-- /WEB-INF/views/ 이 주소에 있는 .jsp로 끝나는 애랑 연결. 지금은 insert.jsp로 연결됨-->
+    </bean>
+
+
+    <!--  인텔리제이에서는 디폴트값으로 index.jsp를 찾게 되어있다고 함.
+    index.jsp와 HomeController.java 의 @Controller(HomeController 클래스)를 찾아가
+    같은 맵핑값(pinsert는 pinsert끼리 plist는 plist끼리)을 가지는 메소드를 맵핑해줌-->
+    <context:component-scan base-package="com.example.springexam01.controller"/>
+
+    <!-- index.jsp에 연결됨   -->
+    <context:component-scan base-package="com.example.springexam01.model"/>
+
+</beans>

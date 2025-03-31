@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AddressMapper">
+
+    <sql id="search">
+        <where>
+            <if test="word!=null and field=='name'">
+                name like '%${word}%'
+            </if>
+            <if test="word!=null and field=='addr'">
+                addr like CONCAT('%', #{word},'%')
+            </if>
+        </where>
+    </sql>
+
+
+    <!-- 추가 insertData-->
+    <insert id="addressInsert">
+        insert into address(name, zipcode, addr, tel) values(#{name}, #{zipcode}, #{addr}, #{tel})
+    </insert>
+    <!-- 전체보기 listData-->
+    <select id="addressList" resultType="addressDTO">
+        select * from address
+    </select>
+    <!-- 전체보기(검색포함)-->
+    <select id="searchAddressList" resultType="addressDTO">
+        select * from address
+        <include refid="search"></include>
+    </select>
+    <!-- 개수 countData-->
+    <select id="countAddress" resultType="Integer">
+        select count(*) from address
+    </select>
+    <!-- 개수(검색포함)-->
+    <select id="searchAddressCount" resultType="Integer">
+        select count(*) from address
+        <include refid="search"></include>
+    </select>
+
+
+    <!-- 상세보기 viewData-->
+    <select id="addressView" resultType="addressDTO">
+        select * from address where num=#{num}
+    </select>
+    <!-- 삭제 deleteData-->
+    <delete id="addressDelete">
+        delete from address where num=#{num}
+    </delete>
+    <!-- 수정 updateData -->
+    <update id="addressUpdate">
+        update address set name=#{name}, zipcode=#{zipcode}, addr=#{addr}, tel=#{tel}
+            where num=#{num}
+    </update>
+
+</mapper>

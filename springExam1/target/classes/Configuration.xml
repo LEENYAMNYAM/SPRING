@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- type에 있는 주소를 alis 속성값으로 별칭을 정하겠다,
+    AddressMapper.xml에서 쓸때 type 값처럼 길게 안쓰고 alias값으로 쓰면됨-->
+    <typeAliases>
+        <typeAlias type="com.example.springexam01.dto.AddressDTO" alias="addressDTO"></typeAlias>
+    </typeAliases>
+
+
+    <mappers>
+        <mapper resource="PersonMapper.xml"/>
+        <mapper resource="AddressMapper.xml"/>
+    </mappers>
+
+</configuration>
+
+

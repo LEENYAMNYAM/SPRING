@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.simpleboard.mapper.BoardMapper">
+    <sql id="search">
+        <where>
+            <if test="word != null and field == 'title'">
+                title like '%${word}%'
+            </if>
+            <if test="word != null and field == 'writer'">
+                writer like '%${word}%'
+            </if>
+            <if test="word != null and field == 'content'">
+                content like '%${word}%'
+            </if>
+        </where>
+    </sql>
+    <select id="findAll" resultType="org.example.simpleboard.dto.BoardDTO">
+        select * from boards
+        <include refid="search"></include>
+    </select>
+    <select id="count" resultType="int">
+        select count(*) from boards
+        <include refid="search"></include>
+    </select>
+
+</mapper>

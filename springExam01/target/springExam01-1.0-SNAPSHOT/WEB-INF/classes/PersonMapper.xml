@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PersonMapper">
+     <!--추가-->
+    <insert id="personInsert">
+        insert into persontb
+        values(#{id},#{name},#{password},#{gender},#{job})
+
+    </insert>
+    <!--전체보기-->
+    <select id="personList" resultType="com.example.springexam01.dto.Person">
+        select * from persontb
+    </select>
+
+</mapper>
