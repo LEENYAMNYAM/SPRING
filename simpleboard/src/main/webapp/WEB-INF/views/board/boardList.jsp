@@ -18,8 +18,8 @@
 		  <c:forEach items="${barr }" var="board"  varStatus="st">
 		  		<tr>
 		  			<td>${board.num } </td>
-		  			<td><a href="boardView?num=${board.num }">${board.subject }</a></td>
-		  			<td>${board.userid }</td>
+		  			<td><a href="view?num=${board.num }">${board.title }</a></td>
+		  			<td>${board.writer }</td>
 		  			<td><fmt:formatDate value="${board.regdate}" pattern="yyyy-MM-dd"/></td>
 		  		</tr>
 		</c:forEach>

@@ -6,13 +6,13 @@
     <sql id="search">
         <where>
             <if test="word != null and field == 'title'">
-                title like '%${word}%'
+                title like '%${word}%' order by num
             </if>
             <if test="word != null and field == 'writer'">
-                writer like '%${word}%'
+                writer like '%${word}%' order by num
             </if>
             <if test="word != null and field == 'content'">
-                content like '%${word}%'
+                content like '%${word}%' order by num
             </if>
         </where>
     </sql>

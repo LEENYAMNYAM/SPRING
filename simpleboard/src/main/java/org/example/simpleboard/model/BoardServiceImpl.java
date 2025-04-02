@@ -25,21 +25,32 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDTO findByNum(int num) {
-        return null;
+        boardRepository.upReadCount(num);       //조회수 증가
+        return boardRepository.dao_findByNum(num);
+    }
+
+    @Override
+    public BoardDTO update(int num) {
+        return boardRepository.dao_findByNum(num);
     }
 
     @Override
     public void update(BoardDTO board) {
-
+        boardRepository.dao_update(board);
     }
 
     @Override
     public void delete(int num) {
-
+        boardRepository.dao_delete(num);
     }
 
     @Override
     public int getCount(HashMap<String, Object> map) {
         return boardRepository.dao_getCount(map);
     }
+
+
+
+
+
 }

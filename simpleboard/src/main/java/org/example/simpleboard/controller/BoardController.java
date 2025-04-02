@@ -6,10 +6,7 @@ import org.example.simpleboard.dto.BoardDTO;
 import org.example.simpleboard.model.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +44,46 @@ public class BoardController {
         map.put("word", word);
         List<BoardDTO> bList = boardService.findAll(map);
         int count = boardService.getCount(map);
+        model.addAttribute("barr", bList);
+        model.addAttribute("count", count);
         return "board/boardList";
     }
 
+    @GetMapping("view")
+    public String boardView(@RequestParam("num") int num, Model model) {
+        BoardDTO board = boardService.findByNum(num);
+        model.addAttribute("board", board);
+        return "board/boardView";
+    }
+
+    // 삭제
+    // 레스트방식으로 넘어올 때 받으려면 @RequestParm이 아니라, Mapping 뒤에 변수명을 받아서 @PathVariable로 가져와야함
+    @DeleteMapping("delete/{num}")
+    @ResponseBody
+    public int delete(@PathVariable("num") int num) {
+        log.info("Delete Board " + num);
+        boardService.delete(num);
+        /* JSON객체로 읽을 수 있도록 보내주어야 하기 때문에(콜백함수가 있기 때문에 콜백함수로 넘어가기 때문에),
+         @ResponseBody를 불러주고 int로 리턴해야하고,
+         라이브러리(pom.xml)에 Jackson Databind를 추가해야함 */
+        return num;
+    }
+
+    // 수정 폼
+    @GetMapping("update/{num}")
+    public String update(@PathVariable("num") int num, Model model) {
+
+        BoardDTO board = boardService.findByNum(num);
+        model.addAttribute("board", board);
+        return "board/boardUpdate";
+    }
+
+    // 수정
+    @PutMapping("update")
+    @ResponseBody
+    public int update(@RequestBody BoardDTO board) {
+        /* JSON 객체로 파라미터를 받아올때는 @RequestBody를 어노테이션 해줘야함 */
+        boardService.update(board);
+        return board.getNum();
+    }
 }

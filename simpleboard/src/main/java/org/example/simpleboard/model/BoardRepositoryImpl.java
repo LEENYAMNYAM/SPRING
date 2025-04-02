@@ -26,21 +26,29 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     @Override
     public BoardDTO dao_findByNum(int num) {
-        return null;
+        return boardMapper.findById(num);
     }
+
 
     @Override
     public void dao_update(BoardDTO board) {
-
+        boardMapper.update(board);
     }
 
     @Override
     public void dao_delete(int num) {
-
+        boardMapper.delete(num);
     }
 
     @Override
     public int dao_getCount(HashMap<String, Object> map) {
         return boardMapper.count(map);
     }
+
+    @Override
+    public void upReadCount(int num) {
+        boardMapper.upReadCount(num);
+    }
+
+
 }

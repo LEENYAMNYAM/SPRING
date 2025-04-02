@@ -12,6 +12,8 @@ public interface BoardService {
     List<BoardDTO> findAll(HashMap<String,Object> map);
     //상세보기
     BoardDTO findByNum(int num);
+    //수정폼
+    BoardDTO update(int num);
     //수정
     void update(BoardDTO board);
     //삭제
