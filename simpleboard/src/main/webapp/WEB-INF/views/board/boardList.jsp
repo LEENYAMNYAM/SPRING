@@ -26,14 +26,36 @@
   </tbody>
   </table>
 	  <form class="d-inline-flex" action="list">
-		<select class="form-select" id="field" name ="field">
-				<option value="title">title</option>
-				<option value="writer">writer</option>
-				<option value="content">content</option>
+		<select class="form-select" id="searchField" name ="searchField">
+			<option value="title">제목</option>
+			<option value="writer">작성자</option>
 		</select>
-		<input type="text" class="form-control" id="word" name="word">
+		<input type="text" class="form-control" id="searchWord" name="searchWord">
 		<button type="submit" class="btn btn-success btn-sm">Search</button>
 	 </form>
+	<div class="d-flex justify-content-between mt-3">
+		<ul class="pagination">
+			<!-- 이전 버튼이 나와야 하는 if문 -->
+			<c:if test="${p.startPage > p.blockPage}">
+				<li class="page-item"><a class="page-link" href="list?pageNum=${p.startPage-p.blockPage}&searchField=${p.searchField}&searchWord=${p.searchWord}">Previous</a></li>
+			</c:if>
+			<!-- 페이지번호 -->
+			<c:forEach begin="${p.startPage }" end="${p.endPage }" var="i">
+				<c:if test="${p.currentPage!=i}">
+					<li class="page-item"><a class="page-link" href="list?pageNum=${i}&searchField=${p.searchField}&searchWord=${p.searchWord}">${i}</a></li>
+				</c:if>
+				<c:if test="${p.currentPage==i}">
+					<li class="page-item active"><a class="page-link" href="#">${i}</a></li>
+				</c:if>
+			</c:forEach>
+			<!-- 이후 버튼이 나와야 하는 if문 -->
+			<c:if test="${p.endPage < p.totPage}">
+				<li class="page-item"><a class="page-link" href="list?pageNum=${p.endPage+1}&searchField=${p.searchField}&searchWord=${p.searchWord}">Next</a></li>
+			</c:if>
+		</ul>
+	</div>
+
+
 </div>
 </body>
 </html>

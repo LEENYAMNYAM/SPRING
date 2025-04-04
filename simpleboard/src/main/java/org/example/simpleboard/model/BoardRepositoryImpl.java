@@ -2,6 +2,7 @@ package org.example.simpleboard.model;
 
 import lombok.RequiredArgsConstructor;
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.FileBoardDTO;
 import org.example.simpleboard.mapper.BoardMapper;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +49,17 @@ public class BoardRepositoryImpl implements BoardRepository {
     @Override
     public void upReadCount(int num) {
         boardMapper.upReadCount(num);
+    }
+
+    //파일
+    @Override
+    public void dao_fileInsert(FileBoardDTO fileBoardDTO) {
+        boardMapper.fileInsert(fileBoardDTO);
+    }
+
+    @Override
+    public List<FileBoardDTO> dao_fileList() {
+        return List.of();
     }
 
 

@@ -1,6 +1,7 @@
 package org.example.simpleboard.model;
 
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.FileBoardDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,4 +22,8 @@ public interface BoardRepository {
     //조회수 증가
     void upReadCount(int num);
 
+    /// /////////////////// FileController
+    //파일
+    void dao_fileInsert(FileBoardDTO fileBoardDTO);
+    List<FileBoardDTO> dao_fileList();
 }

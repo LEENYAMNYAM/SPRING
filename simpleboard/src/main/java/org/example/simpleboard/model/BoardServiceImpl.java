@@ -2,6 +2,7 @@ package org.example.simpleboard.model;
 
 import lombok.RequiredArgsConstructor;
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.FileBoardDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -49,8 +50,16 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.dao_getCount(map);
     }
 
+    //파일
+    @Override
+    public void fileInsert(FileBoardDTO fileBoardDTO) {
+        boardRepository.dao_fileInsert(fileBoardDTO);
+    }
 
-
+    @Override
+    public List<FileBoardDTO> fileList() {
+        return List.of();
+    }
 
 
 }

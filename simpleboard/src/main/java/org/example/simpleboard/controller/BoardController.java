@@ -3,6 +3,7 @@ package org.example.simpleboard.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.PageDTO;
 import org.example.simpleboard.model.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,17 +36,31 @@ public class BoardController {
 
     //전체보기
     @GetMapping("list")
-    public String boardList(@RequestParam(value = "field", defaultValue = "title") String field,
-                            @RequestParam(value = "word", defaultValue = "") String word,
+    public String boardList(@RequestParam(value = "pageNum", defaultValue = "1") String pagerNum,
+                            @RequestParam(value = "searchField", defaultValue = "title") String searchField,
+                            @RequestParam(value = "searchWord", defaultValue = "") String searchWord,
                             Model model) {
-        log.info("field : " + field + ", word : " + word);
+        //페이징
+        int currentPage = Integer.parseInt(pagerNum);
+        int pageSize = 5;
+
         HashMap<String, Object> map = new HashMap<>();
-        map.put("field", field);
-        map.put("word", word);
+        map.put("searchField", searchField);
+        map.put("searchWord", searchWord);
+        map.put("startPage", (currentPage - 1) * pageSize);
+        map.put("pageSize", pageSize);
+        log.info("map : " + map);
+
         List<BoardDTO> bList = boardService.findAll(map);
-        int count = boardService.getCount(map);
+        int total = boardService.getCount(map);
+
+        PageDTO pageDTO = new PageDTO(total, currentPage, pageSize);
+        pageDTO.setSearchWord(searchWord);
+        pageDTO.setSearchField(searchField);
         model.addAttribute("barr", bList);
-        model.addAttribute("count", count);
+        model.addAttribute("count", total);
+        model.addAttribute("p", pageDTO);
+
         return "board/boardList";
     }
 
@@ -54,8 +69,8 @@ public class BoardController {
         BoardDTO board = boardService.findByNum(num);
         model.addAttribute("board", board);
         return "board/boardView";
-    }
 
+    }
     // 삭제
     // 레스트방식으로 넘어올 때 받으려면 @RequestParm이 아니라, Mapping 뒤에 변수명을 받아서 @PathVariable로 가져와야함
     @DeleteMapping("delete/{num}")
@@ -86,4 +101,5 @@ public class BoardController {
         boardService.update(board);
         return board.getNum();
     }
+
 }

@@ -29,10 +29,16 @@
             <param-value>/WEB-INF/spring/servlet-context.xml</param-value>
         </init-param>
 
+        <multipart-config>
+            <location>D:\\JMT\\Spring\\work\\uploads</location>
+            <max-file-size>20971520</max-file-size>  <!-- 1MB * 20 -->
+            <max-request-size>41943040</max-request-size> <!-- 40MB -->
+            <file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
+        </multipart-config>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-
         <!-- / : 주소창에 넘어오는 모든 것들을이라는 의미-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>

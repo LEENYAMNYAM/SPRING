@@ -5,21 +5,20 @@
 <mapper namespace="org.example.simpleboard.mapper.BoardMapper">
     <sql id="search">
         <where>
-            <if test="word != null and field == 'title'">
-                title like '%${word}%' order by num
+            <if test="searchWord != null and searchField == 'title'">
+                title like '%${searchWord}%'
             </if>
-            <if test="word != null and field == 'writer'">
-                writer like '%${word}%' order by num
-            </if>
-            <if test="word != null and field == 'content'">
-                content like '%${word}%' order by num
+            <if test="searchWord != null and searchField == 'writer'">
+                writer like CONCAT('%', #{searchWord}, '%')
             </if>
         </where>
     </sql>
     <select id="findAll" resultType="org.example.simpleboard.dto.BoardDTO">
         select * from boards
         <include refid="search"></include>
+        order by num desc limit #{startPage}, #{pageSize}
     </select>
+
     <select id="count" resultType="int">
         select count(*) from boards
         <include refid="search"></include>

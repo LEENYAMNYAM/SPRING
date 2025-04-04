@@ -2,6 +2,7 @@ package org.example.simpleboard.mapper;
 
 import org.apache.ibatis.annotations.*;
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.FileBoardDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +39,14 @@ public interface BoardMapper {
     void replyCnt(@Param("bnum") int bnum,
                   @Param("amount") int amount);
 
+
+    ///////////// FileBoard
+    // 파일 추가
+    @Insert("insert into fileboard(title, writer, content, fileimage) values(#{title}, #{writer}, #{content}, #{fileimage})")
+    void fileInsert(FileBoardDTO fileBoardDTO);
+
+    // 파일 리스트
+    @Select("select * from fileboard")
+    List<FileBoardDTO> fileList();
 
 }

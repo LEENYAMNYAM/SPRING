@@ -1,6 +1,7 @@
 package org.example.simpleboard.model;
 
 import org.example.simpleboard.dto.BoardDTO;
+import org.example.simpleboard.dto.FileBoardDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,5 +22,10 @@ public interface BoardService {
     //개수
     int getCount(HashMap<String,Object> map);
 
+
+    /// /////////////////// FileController
+    //파일
+    void fileInsert(FileBoardDTO fileBoardDTO);
+    List<FileBoardDTO> fileList();
 
 }
