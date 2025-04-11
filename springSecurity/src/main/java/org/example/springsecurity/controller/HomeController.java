@@ -16,4 +16,10 @@ public class HomeController {
     @GetMapping("/admin")
     public void admin(){}
 
+    @GetMapping("/all")
+    public void all(){}
+
+    @GetMapping("/manager1")
+    public void manager(){}
+
 }

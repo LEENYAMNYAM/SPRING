@@ -7,20 +7,31 @@
                            http://www.springframework.org/schema/security
                            https://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!-- 암호화 시켜줄 객체 -->
+    <!-- 암호화 시켜줄 객체 빈 생성 -->
     <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
+    <!-- -->
     <bean id="customUserDetailsService" class="org.example.springsecurity.domain.CustomUserDetailsService" />
 
+    <!-- 로그인 성공시 객체의 빈생성 -->
+    <bean id="customLoginSuccess" class="org.example.springsecurity.domain.CustomLoginSuccess" />
 
     <security:http>
         <!-- security가 제공해주는걸로 만드는 법-->
-        <security:form-login />
+<!--        <security:form-login />-->
         <!-- 우리가 직접 만드는 방법-->
         <security:form-login login-page="/customLogin" />
-        <security:csrf disabled="true"/>
-    </security:http>
 
+        <!-- 로그인 성공과 실패시 다른 경로를 잡을 경우-->
+<!--        <security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>-->
+
+        <security:csrf disabled="true"/>
+        <!-- 시큐리티에 누구나 접근가능하도록(all Get방식으로 보냄) -->
+        <security:intercept-url pattern="/all" access="permitAll()" />
+        <!-- 접근권한이 ROLE_MANAGER인 사람만 접속가능 -->
+        <security:intercept-url pattern="/manager1" access="hasRole('ROLE_MANAGER')"/>
+        <!-- 로그아웃 처리 -->
+        <security:logout invalidate-session="true" logout-url="/customLogout" />
+    </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider

@@ -12,7 +12,8 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Admin</h1>
+    <h1> Admin </h1>
+    <h3><a href="/customLogout"> 로그아웃 </a> </h3>
     <p> princial : <sec:authentication property="principal" /></p>
     <p> Member : <sec:authentication property="principal.memberDTO" /></p>
     <p> 사용자 이름 : <sec:authentication property="principal.memberDTO.username" /></p>

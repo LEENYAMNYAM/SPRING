@@ -21,6 +21,9 @@ public class MemberTest {
     @Autowired
     private DataSource dataSource;
 
+    /* bCryptPasswordEncoder 가 아니라 PasswordEncoder 을 사용하는 이유는
+    * @Autowired 가 계층구조에 의해 연결됨
+    * 왜냐면 PasswordEncoder가 더 상위 인터페이스라서 연결가능 */
     @Autowired
     private PasswordEncoder passwordEncoder;
 

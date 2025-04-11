@@ -27,7 +27,6 @@
     <context:component-scan base-package="org.example.simpleboard.controller"/>
     <context:component-scan base-package="org.example.simpleboard.model"/>
 
-
     <!-- 이미지 파일 컨트롤러에서 boardDTO로 받은것을 멀티마트형을 받아줄 녀석 필요 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
     </bean>

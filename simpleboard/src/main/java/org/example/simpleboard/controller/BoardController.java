@@ -36,12 +36,12 @@ public class BoardController {
 
     //전체보기
     @GetMapping("list")
-    public String boardList(@RequestParam(value = "pageNum", defaultValue = "1") String pagerNum,
+    public String boardList(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
                             @RequestParam(value = "searchField", defaultValue = "title") String searchField,
                             @RequestParam(value = "searchWord", defaultValue = "") String searchWord,
                             Model model) {
         //페이징
-        int currentPage = Integer.parseInt(pagerNum);
+        int currentPage = Integer.parseInt(pageNum);
         int pageSize = 5;
 
         HashMap<String, Object> map = new HashMap<>();

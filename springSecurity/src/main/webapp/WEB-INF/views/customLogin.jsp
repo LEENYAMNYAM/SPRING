@@ -1,20 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 25. 4. 10.
-  Time: 오후 3:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file ="includes/header.jsp" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+<div class="container mt-5">
+    <h2> Login Form </h2>
     <form method="post" action="/login">
-        i d : <input type="text" name="username" id="username" placeholder="Enter ID"><br/>
-        pwd : <input type="password" name="password" id="password" placeholder="Enter Password"><br/>
-        <button type="submit"> 로그인 </button>
+        <div class="mb-3 mt-3">
+            <label for="username">ID:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary"> 로그인 </button>
     </form>
+</div>
 </body>
 </html>

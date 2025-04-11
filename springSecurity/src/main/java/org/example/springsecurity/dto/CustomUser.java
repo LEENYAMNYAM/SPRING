@@ -13,7 +13,7 @@ public class CustomUser extends User {
     private MemberDTO memberDTO;
 
     public CustomUser(MemberDTO member) {
-        super(member.getUsername(),
+        super(member.getUserid(),
                 member.getUserpw(),
                 member.getAuthList().stream().map(authDTO
                                                   -> new SimpleGrantedAuthority(authDTO.getAuth()))
