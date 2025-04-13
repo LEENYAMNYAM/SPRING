@@ -26,7 +26,7 @@
 
         <security:csrf disabled="true"/>
         <!-- 시큐리티에 누구나 접근가능하도록(all Get방식으로 보냄) -->
-        <security:intercept-url pattern="/all" access="permitAll()" />
+        <security:intercept-url pattern="/**" access="permitAll" />
         <!-- 접근권한이 ROLE_MANAGER인 사람만 접속가능 -->
         <security:intercept-url pattern="/manager1" access="hasRole('ROLE_MANAGER')"/>
         <!-- 로그아웃 처리 -->

@@ -1,5 +1,6 @@
 package org.example.springsecurity.controller;
 
+import lombok.extern.log4j.Log4j2;
 import org.example.springsecurity.dto.BoardDTO;
 import org.example.springsecurity.dto.PageDTO;
 import org.example.springsecurity.service.BoardService;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 
-@RequestMapping("/board/*")
+@RequestMapping("/board/**")
 @Controller
+@Log4j2
 public class BoardController {
 
     @Autowired
@@ -22,6 +24,8 @@ public class BoardController {
     @GetMapping("list")
     public String list(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
                        Model model) {
+        log.info("pageNum : " + pageNum);
+        System.out.println("🔥🔥🔥 Controller 진입 테스트");
         //페이징
         int currentPage = Integer.parseInt(pageNum);
         int pageSize = 5;
