@@ -35,7 +35,6 @@
 				</c:if>
 			</sec:authorize>
 </div>
-
 <script>
 	//삭제
 	$("#btnDelete").click(function(){
