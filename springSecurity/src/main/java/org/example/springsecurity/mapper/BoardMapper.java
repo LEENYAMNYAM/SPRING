@@ -28,4 +28,10 @@ public interface BoardMapper {
     void deleteBoard(int num);
     //개수
     int count();
+    // replyCnt 증감
+    @Update("update boards set replyCnt= replyCnt + #{amount} where num=#{bnum}")
+    /* mybatis에 두개의 값을 보낼려면 @Param을 쓰든가 하나로(Map으로) 묶든가 해야됨 */
+    void replyCnt(@Param("bnum") int bnum,
+                  @Param("amount") int amount);
+
 }

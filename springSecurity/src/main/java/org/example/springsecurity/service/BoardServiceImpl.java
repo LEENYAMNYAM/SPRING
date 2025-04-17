@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void deleteBoard(int num) {
-
+        boardMapper.deleteBoard(num);
     }
 
     @Override

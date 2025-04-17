@@ -34,17 +34,16 @@
 </div>
 
 <div class = "container mt-3">
-   <label for="msg">msg:</label>
-  <textarea class="form-control" id="msg" name="msg" 
+   	<label for="msg">msg:</label>
+  	<textarea class="form-control" id="msg" name="msg"
 			   placeholder="Content goes here" rows=5></textarea>
 	<button class="btn btn-success btn-sm mt-3" id="btnComment">Comment Write</button>
-
-   <div class="mt-3">Comment(<span class="cntSpan"></span>)</div>
-   <div id="result"></div>
-
+	<div class="mt-3">Comment(<span class="cntSpan"></span>)</div>
+   	<div id="result"></div>
 </div>
 
 <script>
+	/* 댓글리스트 출력 */
 	const init = function (){
 		$.ajax({
 			type : "get",
@@ -67,7 +66,7 @@
 		})
 	}
 
-	//삭제
+	// board 삭제
 	$("#btnDelete").click(function(){
 		if(!confirm("정말 삭제할까요?")){
 			return false;

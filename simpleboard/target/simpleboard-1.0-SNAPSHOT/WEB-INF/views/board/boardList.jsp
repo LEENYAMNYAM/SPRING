@@ -25,6 +25,7 @@
 		</c:forEach>
   </tbody>
   </table>
+<%--	검색 --%>
 	  <form class="d-inline-flex" action="list">
 		<select class="form-select" id="searchField" name ="searchField">
 			<option value="title">제목</option>
@@ -33,6 +34,8 @@
 		<input type="text" class="form-control" id="searchWord" name="searchWord">
 		<button type="submit" class="btn btn-success btn-sm">Search</button>
 	 </form>
+
+<%--	페이징 --%>
 	<div class="d-flex justify-content-between mt-3">
 		<ul class="pagination">
 			<!-- 이전 버튼이 나와야 하는 if문 -->

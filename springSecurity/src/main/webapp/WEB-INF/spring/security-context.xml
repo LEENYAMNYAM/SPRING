@@ -7,35 +7,39 @@
                            http://www.springframework.org/schema/security
                            https://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!-- 암호화 시켜줄 객체 빈 생성 -->
+    <!-- 비밀번호를 암호화하는 데 사용할 BCryptPasswordEncoder 빈 등록 -->
     <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <!-- -->
+    <!-- 사용자 정보를 데이터베이스에서 조회하기 위한 CustomUserDetailsService 빈 등록 -->
     <bean id="customUserDetailsService" class="org.example.springsecurity.domain.CustomUserDetailsService" />
 
-    <!-- 로그인 성공시 객체의 빈생성 -->
+    <!-- 로그인 성공 시 사용자 정보를 활용한 추가 처리를 수행할 CustomLoginSuccess 핸들러 빈 등록 -->
     <bean id="customLoginSuccess" class="org.example.springsecurity.domain.CustomLoginSuccess" />
 
     <security:http>
         <!-- security가 제공해주는걸로 만드는 법-->
 <!--        <security:form-login />-->
-        <!-- 우리가 직접 만드는 방법-->
+        <!-- 기본 로그인 폼을 사용하지 않고, 우리가 만든 로그인 페이지(/customLogin)를 사용 나머지는 기본값을 사용하게 됨 -->
         <security:form-login login-page="/customLogin" />
 
-        <!-- 로그인 성공과 실패시 다른 경로를 잡을 경우-->
+        <!-- 로그인 성공 및 실패 처리에 핸들러를 적용할 경우 사용 (현재는 주석 처리됨) -->
 <!--        <security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>-->
 
+        <!-- CSRF 보호 기능 비활성화 (테스트나 개발 중에는 비활성화할 수 있지만, 운영에서는 주의 필요) -->
         <security:csrf disabled="true"/>
-        <!-- 시큐리티에 누구나 접근가능하도록(all Get방식으로 보냄) -->
+        <!-- 모든 요청에 대해 기본적으로 접근 허용 -->
         <security:intercept-url pattern="/**" access="permitAll" />
-        <!-- 접근권한이 ROLE_MANAGER인 사람만 접속가능 -->
+        <!-- /manager1 경로는 ROLE_MANAGER 권한이 있는 사용자만 접근 가능 -->
         <security:intercept-url pattern="/manager1" access="hasRole('ROLE_MANAGER')"/>
-        <!-- 로그아웃 처리 -->
+        <!-- 로그아웃 처리 설정: 세션 무효화 및 로그아웃 URL 지정 -->
         <security:logout invalidate-session="true" logout-url="/customLogout" />
     </security:http>
 
+    <!-- 인증을 처리하는 AuthenticationManager 설정 -->
     <security:authentication-manager>
+        <!-- 사용자 정보를 조회하고 비밀번호를 검증할 AuthenticationProvider 설정 -->
         <security:authentication-provider
             user-service-ref="customUserDetailsService">
+            <!-- 암호화된 비밀번호를 비교하기 위해 사용할 암호화기 지정 -->
             <security:password-encoder ref="bCryptPasswordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>

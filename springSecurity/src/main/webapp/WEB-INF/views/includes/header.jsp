@@ -34,20 +34,25 @@
 			</li>
 			</sec:authorize>
 		</ul>
+		<sec:authentication property="principal" var="pinfo" />
+
 		<ul class="navbar-nav">
 			<%-- 시큐리티 authorize: 권한, isAnonymous() : 누구나, isAuthenticated() : 권한이 있는 사람만 --%>
 			<sec:authorize access="isAnonymous()">
-			<li class="nav-item">
-				<a class="nav-link" href="/customLogin">LOGIN</a>
-			</li>
+				<c:set var="loginUserid" value="" />
+				<li class="nav-item">
+					<a class="nav-link" href="/customLogin">LOGIN</a>
+				</li>
 			</sec:authorize>
 				<%-- 헤더에 principal 객체를 저장 --%>
-			<sec:authentication property="principal" var="pinfo" />
+
 			<sec:authorize access="isAuthenticated()">
 			<li class="nav-item">
+				<c:set var="loginUserid" value="${pinfo.memberDTO.userid}" />
 				<a class="nav-link" href="/customLogout">LOGOUT(<sec:authentication property="principal.memberDTO.username"/>)</a>
 			</li>
 			</sec:authorize>
+				<input type="hidden" id="loginUser" value="${loginUserid}" />
 		</ul>
 	</div>
 </nav>

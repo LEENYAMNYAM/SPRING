@@ -25,7 +25,7 @@ public class BoardController {
     public String list(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
                        Model model) {
         log.info("pageNum : " + pageNum);
-        System.out.println("🔥🔥🔥 Controller 진입 테스트");
+        System.out.println("Controller 진입 테스트");
         //페이징
         int currentPage = Integer.parseInt(pageNum);
         int pageSize = 5;

@@ -15,7 +15,7 @@
     <mvc:annotation-driven/>
 
     <!--webapp 폴더 밑에 resources 폴더 만들어서 resource로 넘어오는 애들을 전부 연결시켜줌 -->
-    <mvc:resources mapping="/resources/**" location="resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <!-- JSP 연결?-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,7 +26,6 @@
     <!-- controller, model 객체가 필요한데, 어디 있는 지 알려줘야함.-->
     <context:component-scan base-package="org.example.simpleboard.controller"/>
     <context:component-scan base-package="org.example.simpleboard.model"/>
-
 
     <!-- 이미지 파일 컨트롤러에서 boardDTO로 받은것을 멀티마트형을 받아줄 녀석 필요 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
