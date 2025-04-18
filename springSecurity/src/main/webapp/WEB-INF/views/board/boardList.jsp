@@ -24,11 +24,10 @@
 		</c:forEach>
   </tbody>
   </table>
-
 <%--	페이징 --%>
 	<div class="d-flex justify-content-between mt-3">
 		<ul class="pagination">
-			<!-- 이전 버튼이 나와야 하는 if문 -->
+			<!-- prev 버튼이 나와야 하는 if문 -->
 			<c:if test="${p.startPage > p.blockPage}">
 				<li class="page-item"><a class="page-link" href="list?pageNum=${p.startPage-p.blockPage}">Previous</a></li>
 			</c:if>
@@ -41,15 +40,12 @@
 					<li class="page-item active"><a class="page-link" href="#">${i}</a></li>
 				</c:if>
 			</c:forEach>
-			<!-- 이후 버튼이 나와야 하는 if문 -->
+			<!-- next 버튼이 나와야 하는 if문 -->
 			<c:if test="${p.endPage < p.totPage}">
 				<li class="page-item"><a class="page-link" href="list?pageNum=${p.endPage+1}">Next</a></li>
 			</c:if>		</ul>
 	</div>
 </div>
-
-
-
 
 </body>
 </html>

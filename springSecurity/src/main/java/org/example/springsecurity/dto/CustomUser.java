@@ -24,7 +24,6 @@ public class CustomUser extends User {
         /* 시큐리티가 적용된 user객체가 반환됨 */
     }
 
-
 //    public CustomUser(String username,
 //                      String password,
 //                      Collection<? extends GrantedAuthority> authorities) {
